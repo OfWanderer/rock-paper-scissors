@@ -21,7 +21,40 @@ let plan = `
     - The desired output is to announce the winner of the game wether it is the computer or the person who is playing.
 
 • Given your inputs, what are the necessary steps to return the desired output ?
-    -
-    `
+    
+    - My game needs to play against the computer, for that we need a function that will randomly return "Rock", "Paper" or "Scissors".
+
+    - We also need a function that plays the game for a single round with two parameters, "playerSelection" and "computerSelection" and then returns  a const that declares the winner.
+        
+        ↳ "playerSelection" parameter needs to be case insensitive.
+    
+    - And lastly we need another function that const's us play a 5 round game that keeps score and again declares the winner or the loser at the end.    `
 
 console.log(plan);
+
+
+// Problem I - "getComputerChoice" Function that should randomly return "Rock", "Paper" or "Scissors".
+// Idea is to assign a random number that is in between 0-10 to each "Rock", "Paper" and "Scissors".
+// Same is done with the "random" variable inside the "getComputerChoice" function.
+// If one of the randomly generated numbers match the value of the computer it should return as a string name that matches one of the three.
+// "Rock", "Paper" and "Scissors" must not have the same values.
+
+const rock = 1;
+
+const paper = 2;
+
+const scissors = 3;
+
+function getComputerChoice() {
+    const random = Math.floor(Math.random() * 3) + 1;
+
+    if (random === rock) {
+        console.log("Rock");
+    } else if (random === paper) {
+        console.log("Paper");
+    } else if (random === scissors) {
+        console.log("Scissors");
+    } else {
+        console.log("Something is wrong, " + random + " does not match the rest.");
+    }
+}
