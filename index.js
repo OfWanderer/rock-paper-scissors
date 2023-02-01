@@ -6,7 +6,7 @@ console.log("For future of the planet Earth may depend on it.");
 let plan = `
 • Does your program have a user interface ?
 
-    - We do not need a UI (User Interface) for current version of the game.
+    - We do not necessarily need a UI (User Interface) for current version of the game.
     
 • What inputs will your program have ?
 
@@ -34,8 +34,7 @@ console.log(plan);
 
 
 // Problem I - "getComputerChoice" Function that should randomly return "Rock", "Paper" or "Scissors".
-// Idea is to assign a random number that is in between 0-10 to each "Rock", "Paper" and "Scissors".
-// Same is done with the "random" variable inside the "getComputerChoice" function.
+// Idea is to assign numbers to each "Rock", "Paper" and "Scissors" and then make computer choose randomly among those values.
 // If one of the randomly generated numbers match the value of the computer it should return as a string name that matches one of the three.
 // "Rock", "Paper" and "Scissors" must not have the same values.
 
@@ -49,12 +48,86 @@ function getComputerChoice() {
     const random = Math.floor(Math.random() * 3) + 1;
 
     if (random === rock) {
-        console.log("Rock");
+
+        const optionOne = "Rock";
+        return optionOne;
+
     } else if (random === paper) {
-        console.log("Paper");
+
+        const optionTwo = "Paper";
+        return optionTwo;
+
     } else if (random === scissors) {
-        console.log("Scissors");
+
+        const optionThree = "Scissors";
+        return optionThree;
+
     } else {
-        console.log("Something is wrong, " + random + " does not match the rest.");
+        return "Something is wrong.";
+    }
+}
+
+
+// Problem II - We need a function that plays a single round of the game.
+// Function should have two parameters "playerSelection" and "computerSelection".
+// It should return a string that declares the winner of the round like this: "You lose. Paper beats rock."
+// "playerSelection" Parameter should be case insensitive.
+
+
+function singleRound(playerSelection, computerSelection) {
+
+    playerSelection = prompt("Which one do you chose; Rock, Paper or Scissors ?", "");
+    computerSelection = getComputerChoice();
+
+    if (playerSelection === null) {
+
+        return "The game has been cancelled.";
+
+    } else if (playerSelection === "") {
+
+        console.log("Player has chosen nothing.")
+
+    } else {
+
+        console.log("Player has chosen " + playerSelection + ".");
+        console.log("Computer has chosen " + computerSelection + ".");
+
+    }
+
+    playerSelection = playerSelection.toLowerCase();
+
+    
+    if (playerSelection === "rock" && computerSelection === "Paper") {
+
+        return "Player has lost the game. Do you want to play again ?";
+
+    } else if (playerSelection === "paper" && computerSelection === "Scissors") {
+
+        return "Player has lost the game. Do you want to play again ?";
+
+    } else if (playerSelection === "scissors" && computerSelection === "Rock") {
+
+        return "Player has lost the game. Do you want to play again ?";
+
+    } else if (playerSelection === "rock" && computerSelection === "Scissors") {
+        
+        return "Player has won the game. Do you want to play again ?";
+
+    } else if (playerSelection === "paper" && computerSelection === "Rock") {
+        
+        return "Player has won the game. Do you want to play again ?";
+
+    } else if (playerSelection === "scissors" && computerSelection === "Paper") {
+
+        return "Player has won the game. Do you want to play again ?";
+
+    } else if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+
+        return "It is a draw. Do you want to play again ?";
+
+    } else {
+
+        return "You need to pick one of the mentioned options in order to play the game.";
+
     }
 }
