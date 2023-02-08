@@ -45,25 +45,25 @@ const paper = 2;
 const scissors = 3;
 
 function getComputerChoice() {
+
     const random = Math.floor(Math.random() * 3) + 1;
 
     if (random === rock) {
 
-        const optionOne = "Rock";
-        return optionOne;
+        return "Rock"
 
     } else if (random === paper) {
 
-        const optionTwo = "Paper";
-        return optionTwo;
+        return "Paper"
 
     } else if (random === scissors) {
 
-        const optionThree = "Scissors";
-        return optionThree;
+        return "Scissors"
 
     } else {
+
         return "Something is wrong.";
+
     }
 }
 
@@ -75,7 +75,7 @@ function getComputerChoice() {
 
 let playerWin = "Player has won the game.";
 let computerWin = "Computer has won the game.";
-let draw = "It is a draw";
+let draw = "It is a draw.";
 let cancel = "The game has been cancelled.";
 let warning = "You need to pick one of the mentioned options in order to play the game.";
 
@@ -135,7 +135,17 @@ function playRound(playerSelection, computerSelection, result) {
 
     } else if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
 
-        return draw;
+        console.log(draw);
+
+        if (confirm("It's a draw. Would you like to try again ?") == true) {
+
+            return playRound();
+
+        } else {
+
+            return "Player has settled for draw, the game has ended.";
+
+        }
 
     } else {
 
@@ -147,3 +157,86 @@ function playRound(playerSelection, computerSelection, result) {
 // Problem III - We need a new function called game() to play the game for 5 rounds.
 // It should keep the score and declare the winner or loser.
 
+let playerScore = 0;
+let computerScore = 0;
+
+function game(round) {
+
+    for (let i = 0; i < 5; ++i){
+
+        round = playRound();
+        playerScore;
+        computerScore;
+
+        if (round === cancel) {
+
+            playerScore = 0;
+            computerScore = 0;
+            return cancel;
+
+        } else if (round === computerWin) {
+
+            computerScore++;
+
+        } else if (round === playerWin) {
+
+            playerScore++;
+
+        } else if (round === draw) {
+
+            console.log(draw);
+
+        } else if (round === warning) {
+
+            console.log(warning);
+
+        } else {
+
+            console.log("Something is wrong.");
+
+        }
+
+        console.log(`Player: ${playerScore} Computer: ${computerScore}`);
+    }
+
+    if (playerScore > computerScore || playerScore >= 3) {
+        
+        playerScore = 0;
+        computerScore = 0;
+        return "Player has won.";
+
+    } else if (playerScore < computerScore || computerScore >= 3) {
+
+        playerScore = 0;
+        computerScore = 0;
+        return "Computer has won.";
+
+    } else if (playerScore === computerScore) {
+
+        if (confirm("It's a draw. Would you like to continue until there is a winner ?") == true) {
+
+            for (let i = 0; i < Infinity; ++i) {
+
+                return playRound();
+
+            }
+
+        } else {
+
+            playerScore = 0;
+            computerScore = 0;
+            return "Player has settled for draw, the game has ended.";
+
+        }
+
+    } else {
+
+        console.log("There is something wrong.");
+
+    }
+
+    console.log(`Player: ${playerScore} Computer: ${computerScore}`);
+
+    playerScore = 0;
+    computerScore = 0;
+}
