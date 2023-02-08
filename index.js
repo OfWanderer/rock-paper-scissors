@@ -92,8 +92,10 @@ function playRound(playerSelection, computerSelection, result) {
 
     } else if (playerSelection === "") {
 
-        console.log("Player has chosen nothing.");
+        console.warn("Player has chosen nothing.");
         console.log("Computer has chosen " + computerSelection + ".");
+        console.warn(warning);
+        return playRound();
 
     } else {
 
@@ -149,7 +151,8 @@ function playRound(playerSelection, computerSelection, result) {
 
     } else {
 
-        return warning;
+        console.warn(warning);
+        return playRound();
 
     }
 }
@@ -162,6 +165,8 @@ let computerScore = 0;
 
 function game(round) {
 
+    alert("This is a five round game of Rock, Paper & Scissors.\nBest out of five wins the game.\nGood luck.");
+
     for (let i = 0; i < 5; ++i){
 
         round = playRound();
@@ -170,9 +175,19 @@ function game(round) {
 
         if (round === cancel) {
 
-            playerScore = 0;
-            computerScore = 0;
-            return cancel;
+            if (confirm('You are about to end the five round game, press "OK" if you want to end or press "Cancel" if you want to continue the game.') == false) {
+                
+                playerScore;
+                computerScore;
+                return game();
+
+            } else {
+
+                playerScore = 0;
+                computerScore = 0;
+                return cancel;
+
+            }
 
         } else if (round === computerWin) {
 
@@ -197,29 +212,27 @@ function game(round) {
         }
 
         console.log(`Player: ${playerScore} Computer: ${computerScore}`);
+
+        if (playerScore >= 3 && playerScore > computerScore) {
+        
+            playerScore = 0;
+            computerScore = 0;
+            return "Player has won.";
+    
+        } else if (computerScore >= 3 && playerScore < computerScore) {
+    
+            playerScore = 0;
+            computerScore = 0;
+            return "Computer has won.";
+    
+        }
     }
 
-    if (playerScore > computerScore || playerScore >= 3) {
-        
-        playerScore = 0;
-        computerScore = 0;
-        return "Player has won.";
-
-    } else if (playerScore < computerScore || computerScore >= 3) {
-
-        playerScore = 0;
-        computerScore = 0;
-        return "Computer has won.";
-
-    } else if (playerScore === computerScore) {
+    if (playerScore === computerScore) {
 
         if (confirm("It's a draw. Would you like to continue until there is a winner ?") == true) {
 
-            for (let i = 0; i < Infinity; ++i) {
-
                 return playRound();
-
-            }
 
         } else {
 
