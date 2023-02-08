@@ -73,21 +73,34 @@ function getComputerChoice() {
 // It should return a string that declares the winner of the round like this: "You lose. Paper beats rock."
 // "playerSelection" Parameter should be case insensitive.
 
+let playerWin = "Player has won the game.";
+let computerWin = "Computer has won the game.";
+let draw = "It is a draw";
+let cancel = "The game has been cancelled.";
+let warning = "You need to pick one of the mentioned options in order to play the game.";
 
-function singleRound(playerSelection, computerSelection) {
+
+
+function playRound(playerSelection, computerSelection, result) {
 
     playerSelection = prompt("Which one do you chose; Rock, Paper or Scissors ?", "");
     computerSelection = getComputerChoice();
 
     if (playerSelection === null) {
 
-        return "The game has been cancelled.";
+        return cancel;
 
     } else if (playerSelection === "") {
 
-        console.log("Player has chosen nothing.")
+        console.log("Player has chosen nothing.");
+        console.log("Computer has chosen " + computerSelection + ".");
 
     } else {
+
+        let a = playerSelection.substring(0, 1).toUpperCase();
+        let b = playerSelection.substring(!0).toLowerCase();
+
+        playerSelection = a + b;
 
         console.log("Player has chosen " + playerSelection + ".");
         console.log("Computer has chosen " + computerSelection + ".");
@@ -95,39 +108,42 @@ function singleRound(playerSelection, computerSelection) {
     }
 
     playerSelection = playerSelection.toLowerCase();
-
     
     if (playerSelection === "rock" && computerSelection === "Paper") {
 
-        return "Player has lost the game. Do you want to play again ?";
+        return computerWin;
 
     } else if (playerSelection === "paper" && computerSelection === "Scissors") {
 
-        return "Player has lost the game. Do you want to play again ?";
+        return computerWin;
 
     } else if (playerSelection === "scissors" && computerSelection === "Rock") {
 
-        return "Player has lost the game. Do you want to play again ?";
+        return computerWin;
 
     } else if (playerSelection === "rock" && computerSelection === "Scissors") {
         
-        return "Player has won the game. Do you want to play again ?";
+        return playerWin;
 
     } else if (playerSelection === "paper" && computerSelection === "Rock") {
         
-        return "Player has won the game. Do you want to play again ?";
+        return playerWin;
 
     } else if (playerSelection === "scissors" && computerSelection === "Paper") {
 
-        return "Player has won the game. Do you want to play again ?";
+        return playerWin;
 
     } else if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
 
-        return "It is a draw. Do you want to play again ?";
+        return draw;
 
     } else {
 
-        return "You need to pick one of the mentioned options in order to play the game.";
+        return warning;
 
     }
 }
+
+// Problem III - We need a new function called game() to play the game for 5 rounds.
+// It should keep the score and declare the winner or loser.
+
