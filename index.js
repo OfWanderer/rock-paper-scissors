@@ -78,10 +78,13 @@ let computerWin = "Computer has won the game.";
 let draw = "It is a draw.";
 let cancel = "The game has been cancelled.";
 let warning = "You need to pick one of the mentioned options in order to play the game.";
+let disqualification = "The player has been disqualified.";
+let confirmDraw;
+let disqualifyConfirm;
 
 
 
-function playRound(playerSelection, computerSelection, result) {
+function playRound(playerSelection, computerSelection) {
 
     playerSelection = prompt("Which one do you chose; Rock, Paper or Scissors ?", "");
     computerSelection = getComputerChoice();
@@ -139,13 +142,16 @@ function playRound(playerSelection, computerSelection, result) {
 
         console.log(draw);
 
-        if (confirm("It's a draw. Would you like to try again ?") == true) {
+        confirmDraw = confirm("It's a draw. Would you like to try again ?");
+
+        if (confirmDraw == true) {
 
             return playRound();
 
-        } else {
+        } else if (confirmDraw == false) {
 
-            return "Player has settled for draw, the game has ended.";
+            draw = "Player has settled for draw, the game has ended.";
+            return draw;
 
         }
 
@@ -163,9 +169,11 @@ function playRound(playerSelection, computerSelection, result) {
 let playerScore = 0;
 let computerScore = 0;
 
+let intro = "This is a five round game of Rock, Paper & Scissors.\n\n• Best out of five wins the game.\n\n• If a round is canceled during the game you will be disqualified.\n\nBest of luck.";
+
 function game(round) {
 
-    alert("This is a five round game of Rock, Paper & Scissors.\nBest out of five wins the game.\nGood luck.");
+    alert(intro);
 
     for (let i = 0; i < 5; ++i){
 
@@ -175,16 +183,18 @@ function game(round) {
 
         if (round === cancel) {
 
-            if (confirm('You are about to end the five round game, press "OK" if you want to end or press "Cancel" if you want to continue the game.') == false) {
+            if (confirm('You are about to end the five round game; \n\nPress "OK" if you want to end the game or press "Cancel" if you want to continue.') == false) {
                 
                 playerScore;
                 computerScore;
+                intro = "The match continues.";
                 return game();
 
             } else {
 
                 playerScore = 0;
                 computerScore = 0;
+                intro = "This is a five round game of Rock, Paper & Scissors.\n\n• Best out of five wins the game.\n\n• If a round is canceled during the game you will be disqualified.\n\nBest of luck.";
                 return cancel;
 
             }
@@ -199,7 +209,20 @@ function game(round) {
 
         } else if (round === draw) {
 
-            console.log(draw);
+            draw = "It is a draw.";
+            disqualifyConfirm = confirm('Warning: You are about to get disqualified!/n/nIf you press "OK" the game will end or if you press "Cancel" the game will continue.');
+
+            if (disqualifyConfirm == true) {
+
+                intro = "This is a five round game of Rock, Paper & Scissors.\n\n• Best out of five wins the game.\n\n• If a round is canceled during the game you will be disqualified.\n\nBest of luck.";
+                return disqualification;
+
+            } else if (disqualifyConfirm == false) {
+
+                intro = "The match continues.";
+                return game();
+
+            }
 
         } else if (round === warning) {
 
@@ -217,13 +240,19 @@ function game(round) {
         
             playerScore = 0;
             computerScore = 0;
-            return "Player has won.";
+
+            intro = "This is a five round game of Rock, Paper & Scissors.\n\n• Best out of five wins the game.\n\n• If a round is canceled during the game you will be disqualified.\n\nBest of luck.";
+            
+            return "Player has won 3 games out of 5, Player is the winner.";
     
         } else if (computerScore >= 3 && playerScore < computerScore) {
     
             playerScore = 0;
             computerScore = 0;
-            return "Computer has won.";
+
+            intro = "This is a five round game of Rock, Paper & Scissors.\n\n• Best out of five wins the game.\n\n• If a round is canceled during the game you will be disqualified.\n\nBest of luck.";
+
+            return "Computer has won 3 games out of 5, Computer is the winner.";
     
         }
     }
