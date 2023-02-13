@@ -28,9 +28,16 @@ let plan = `
         
         ↳ "playerSelection" parameter needs to be case insensitive.
     
-    - And lastly we need another function that const's us play a 5 round game that keeps score and again declares the winner or the loser at the end.    `
+    - And lastly we need another function that const's us play a 5 round game that keeps score and again declares the winner or the loser at the end.
+    
+    
+    `;
 
 console.log(plan);
+
+console.log('In order to play a single round of Rock, Paper & Scissors invoke the "playRound()" function.');
+
+console.log('In order to play 5 rounds of Rock, Paper & Scissors invoke the "game()" function.');
 
 
 // Problem I - "getComputerChoice" Function that should randomly return "Rock", "Paper" or "Scissors".
